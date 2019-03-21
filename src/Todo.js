@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Todo extends Component {
     // FIX ME!
     render(){
-        return <div className="Todo">{ this.props.TODO }</div>
+        return <li className="Todo">{ this.props.task }</li>
     }
 }
 

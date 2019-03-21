@@ -32,7 +32,7 @@ class NewTodoForm extends Component {
                 <form>
                     <label htmlFor="Task">Task:</label>
                     <input name="task" value={ this.state.task } onChange={ this.handleChange }></input>
-                    <button></button>
+                    <button>Submit Task</button>
                 </form>
             </div>
         );
