@@ -11,10 +11,11 @@ class TodoList extends Component {
         };
         this.generateNewTodo = this.generateNewTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);
+        this.editTodoForm = this.editTodoForm.bind(this);
     }
 
     generateNewTodo(todo) {
-        let newTodo = { ...todo, id: uuid() };
+        let newTodo = { ...todo, id: uuid(), editForm: false };
         this.setState(state => ({
             todos: [...state.todos, newTodo]
         }));
@@ -28,11 +29,25 @@ class TodoList extends Component {
         ))
     }
 
+    editTodoForm(id){
+        console.log(this.state.todos);
+
+        this.setState(st => (
+            {
+                todos: st.todos.map(t => (
+                    t.id === id && (t.editForm = true)
+                ))
+            }
+            ))
+            console.log(this.state.todos);
+    }
+
     render() {
         const todos = this.state.todos.map(t => (
-            <Todo key={t.id} task={t.task} remove={() => this.removeTodo(t.id)} />
-        ))
+            <Todo key={t.id} task={t.task} remove={() => this.removeTodo(t.id)} edit={() => this.editTodoForm(t.id)} editForm={t.editForm}/>
 
+        ))
+        console.log("what is todos", todos)
         return (
             <div>
                 <NewTodoForm makeTodo={this.generateNewTodo} />
