@@ -6,13 +6,32 @@ class NewTodoForm extends Component {
         this.state = {
             task: ""
         }
+        
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
     }
+
+    handleSubmit(evt){
+        evt.preventDefault();
+        this.props.makeTodo(this.state);
+        this.setState({
+            task: ""
+        })
+    }
+
+    handleChange(evt){
+        this.setState({
+            [evt.target.name]: evt.target.value
+        })
+    }
+    
     render(){
         return (
-            <div className="NewTodoForm" onSubmit={}>
+            <div className="NewTodoForm" onSubmit={ this.handleSubmit }>
                 <form>
                     <label htmlFor="Task">Task:</label>
-                    <input name="task" value="" onChange={}></input>
+                    <input name="task" value={ this.state.task } onChange={ this.handleChange }></input>
                     <button></button>
                 </form>
             </div>
