@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import uuid from "uuid/v4";
 import NewTodoForm from './NewTodoForm';
 import Todo from './Todo';
+import EditTodoForm from './EditTodoForm';
+
 
 class TodoList extends Component {
     constructor(props) {
@@ -42,10 +44,21 @@ class TodoList extends Component {
             console.log(this.state.todos);
     }
 
+    editTodo(id){
+        this.setState({
+            todos: st.todos.map(t => (
+                t.id === id && (t.editForm = false)
+            ))
+        })
+    }
+
     render() {
         const todos = this.state.todos.map(t => (
-            <Todo key={t.id} task={t.task} remove={() => this.removeTodo(t.id)} edit={() => this.editTodoForm(t.id)} editForm={t.editForm}/>
-
+            if (t.editForm) {
+                <EditTodoForm value={ t.task } />
+            } else {
+                <Todo key={t.id} task={t.task} remove={() => this.removeTodo(t.id)} edit={() => this.editTodoForm(t.id)} editForm={t.editForm} />
+            }
         ))
         console.log("what is todos", todos)
         return (
